@@ -6,29 +6,34 @@ import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 
 const menuitems = [
   {
-    title: "Features",
+    title: "Services",
     path: "#",
     children: [
-      { title: "Action", path: "#" },
-      { title: "Another action", path: "#" },
-      { title: "Dropdown Submenu", path: "#" },
-    ],
+      {
+        title: "Automation",
+        path: "#"
+      },
+      {
+        title: "Marketing",
+        path: "#"
+      },
+      {
+        title: "Content",
+        path: "#"
+      }            
+    ]
   },
   {
-    title: "Pricing",
-    path: "/pricing",
+    title: "Resources",
+    path: "/resources",
+  },  
+  {
+    title: "Learning",
+    path: "/blog",
   },
   {
     title: "About",
     path: "/about",
-  },
-  {
-    title: "Blog",
-    path: "/blog",
-  },
-  {
-    title: "Contact",
-    path: "/contact",
   },
 ];
 ---
@@ -37,9 +42,16 @@ const menuitems = [
   <header class="flex flex-col lg:flex-row justify-between items-center my-5">
     <Astronav>
       <div class="flex w-full lg:w-auto items-center justify-between">
-        <a href="/" class="text-lg"
-          ><span class="font-bold text-slate-800 text-2xl">Ai</span><span
-            class="text-slate-500"> Wrangler</span
+        <a href="/" class="text-lg">
+          <span class="flex flex-row space-x-1"
+            ><p
+              class="first-letter:font-bold text-slate-800 first-letter:text-2xl overflow-hidden">
+              Ai
+            </p>
+            <p
+              class="first-letter:font-bold first-letter:text-2xl text-slate-500">
+              Wrangler
+            </p></span
           >
         </a>
         <div class="block lg:hidden">
