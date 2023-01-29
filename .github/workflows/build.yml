@@ -21,7 +21,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.ACTION_TOKEN }}
         with:
-          source-directory: /public
+          source-directory: public
           target-directory: dist
           destination-github-username: 'amcontent'
           destination-repository-name: 'netlify-ai-wrangler'
