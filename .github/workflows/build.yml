@@ -23,6 +23,7 @@ jobs:
         with:
           source-directory: template/dist
           target-directory: dist
+          destination-github-username: 'amcontent'
           destination-repository-name: 'netlify-ai-wrangler'
           target-branch: main
           commit-message: 'update from build'
