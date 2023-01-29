@@ -1,0 +1,28 @@
+name: CI
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    name: 'Build'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3     
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7.5.0         
+      - name: Build
+        run: |
+          pnpm i
+          pnpm run build
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.ACTION_TOKEN }}
+        with:
+          source-directory: template/dist
+          target-directory: dist
+          destination-repository-name: 'netlify-ai-wrangler'
+          target-branch: main
+          commit-message: 'update from build'
+      - run: echo "🍏 This job's status is ${{ job.status }}."     
