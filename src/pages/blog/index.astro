@@ -1,10 +1,8 @@
 ---
-import { Picture } from "@astrojs/image/components";
 import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
 import Layout from "@layouts/Layout.astro";
-import { getFormattedDate } from "@utils/all";
-import { log } from "astro/dist/core/logger/core";
+import List from '@components/list.astro';
 import { getCollection } from 'astro:content';
 const blogEntries = await getCollection('blog');
 
@@ -19,48 +17,7 @@ const blogEntries = await getCollection('blog');
       >
     </Sectionhead>
     <main class="mt-16">
-      <ul class="grid gap-16 max-w-4xl mx-auto">
-        {
-          blogEntries.map((post, index) => (
-            <li>
-              <a href={`/blog/${post.slug}`}>
-                <div class="grid md:grid-cols-2 gap-5 md:gap-10 items-center">
-                  <Picture
-                    src={post.data.image}
-                    widths={[200, 400, 800]}
-                    sizes="(max-width: 800px) 100vw, 800px"
-                    aspectRatio="16:9"
-                    alt="Thumbnail"
-                    loading={index === 0 ? "eager" : "lazy"}
-                    class="w-full rounded-md aspect-video"
-                  />
-                  <div>
-                    <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
-                      {post.data.category}
-                    </span>
-
-                    <h2 class="text-3xl font-semibold leading-snug tracking-tight mt-1 ">
-                      {post.data.title}
-                    </h2>
-
-                    <div class="flex gap-2 mt-3">
-                      <span class="text-gray-400">
-                        {post.data.author}
-                      </span>
-                      <span class="text-gray-400">• </span>
-                      <time
-                        class="text-gray-400"
-                        datetime={post.data.publishDate}>
-                        {getFormattedDate(post.data.publishDate)}
-                      </time>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </li>
-          ))
-        }
-      </ul>   
+      <List items={blogEntries} />
     </main>
   </Container>
 </Layout>

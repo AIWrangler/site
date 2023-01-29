@@ -84,6 +84,13 @@ declare module 'astro:content' {
   collection: "blog",
   data: any
 },
+"large-language-models-can-self-Improve.md": {
+  id: "large-language-models-can-self-Improve.md",
+  slug: "large-language-models-can-self-improve",
+  body: string,
+  collection: "blog",
+  data: any
+},
 },
 "resources": {
 "complete-guide-fullstack-development.md": {

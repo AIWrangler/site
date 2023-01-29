@@ -1,0 +1,49 @@
+---
+import { Picture } from "@astrojs/image/components";
+import { getFormattedDate } from "@utils/all";
+
+const {items} = Astro.props
+---
+
+<ul class="grid gap-16 max-w-4xl mx-auto">
+  {
+    items.map((item, index) => (
+      <li>
+        <a href={`/blog/${item.slug}`}>
+          <div class="grid md:grid-cols-2 gap-5 md:gap-10 items-center">
+            <Picture
+              src={item.data.image}
+              widths={[200, 400, 800]}
+              sizes="(max-width: 800px) 100vw, 800px"
+              aspectRatio="16:9"
+              alt="Thumbnail"
+              loading={index === 0 ? "eager" : "lazy"}
+              class="w-full rounded-md aspect-video"
+            />
+            <div>
+              <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
+                {item.data.category}
+              </span>
+
+              <h2 class="text-3xl font-semibold leading-snug tracking-tight mt-1 ">
+                {item.data.title}
+              </h2>
+
+              <div class="flex gap-2 mt-3">
+                <span class="text-gray-400">
+                  {item.data.author}
+                </span>
+                <span class="text-gray-400">• </span>
+                <time
+                  class="text-gray-400"
+                  datetime={item.data.publishDate}>
+                  {getFormattedDate(item.data.publishDate)}
+                </time>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+    ))
+  }
+</ul>   
