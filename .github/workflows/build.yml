@@ -13,6 +13,7 @@ jobs:
           version: 7.5.0         
       - name: Build
         run: |
+          pnpm i -g pnpm
           pnpm i
           pnpm run build
       - name: Pushes to another repository
@@ -20,8 +21,9 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.ACTION_TOKEN }}
         with:
-          source-directory: template/dist
+          source-directory: dist
           target-directory: dist
+          destination-github-username: 'amcontent'
           destination-repository-name: 'netlify-ai-wrangler'
           target-branch: main
           commit-message: 'update from build'
