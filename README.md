@@ -1,3 +1,10 @@
+
+https://github.com/AMContent/site-ai-wrangler
+https://github.com/AMContent/netlify-ai-wrangler
+https://aiwrangler.netlify.com
+
+---
+
 # Astroship - Astro Starter Template 🛸
 
 Astroship is a starter template for startups, marketing websites, landing pages & blog. Built with Astro & TailwindCSS.
