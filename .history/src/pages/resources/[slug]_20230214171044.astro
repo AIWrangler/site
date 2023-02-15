@@ -1,0 +1,59 @@
+---
+import { useSanityClient, groq } from "astro-sanity";
+import imageUrlBuilder from '@sanity/image-url'
+import ProductGrid5 from '@uikits/tuik/product-grid-5.astro'
+import Card from '@uikits/tailwindcss/card-stacked.astro'
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import Layout from "@layouts/Layout.astro";
+const builder = imageUrlBuilder(useSanityClient())
+function urlFor(source) {
+  return builder.image(source)
+}
+
+export async function getFirstBlogPost() {
+  const query = groq`*[_type == "brand"]{title, slug, description, mainImage, links[]->{url, type->{title, logo}}, tags[]->{title}}`;
+  const firstPost = await useSanityClient().fetch(query);
+  return firstPost;
+}
+
+export async function getStaticPaths() {
+  let brands = await getFirstBlogPost();
+  const paths = brands.map(brand => ({
+    params: { slug: brand.slug.current}, props: { brand },
+  }));
+  return paths
+}
+// 2. When its time to render, you can get the entry directly from the prop
+const { brand } = Astro.props;
+console.dir({brand}, {depth:null})
+---
+
+<Layout title="Resources">
+  <Container>
+    <main class="mt-24 mx-auto w-5/6 items-center flex">
+        <div class="mx-auto flex flex-row space-x-20">
+          <div class="flex flex-col">
+            <h1 class="text-5xl font-black">{brand.title}</h1>
+            <dir class="flex flex-row space-x-6">
+              {brand.links && brand.links.map(link=>
+                ({link ? 
+                  <a class="inline-block" href={link?.url}>
+                    <img class="w-4" src={urlFor(link.type.logo)} />
+                  </a>
+                })
+              )}
+            </div>            
+            <div>
+              {brand.tags && brand.tags.filter(t=>t.title).map(tag=>
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs text-gray-700 mr-2 mb-2">#{tag.title}</span>
+              )}
+            </div>
+            <p>{brand.description}</p>
+          </div>
+          <img class="w-1/2" src={urlFor(brand?.mainImage)} />
+      </div>
+    </main>
+  </Container>
+</Layout>
+

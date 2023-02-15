@@ -92,29 +92,6 @@ declare module 'astro:content' {
   data: any
 },
 },
-"resources": {
-"complete-guide-fullstack-development.md": {
-  id: "complete-guide-fullstack-development.md",
-  slug: "complete-guide-fullstack-development",
-  body: string,
-  collection: "resources",
-  data: any
-},
-"essential-data-structures-algorithms.md": {
-  id: "essential-data-structures-algorithms.md",
-  slug: "essential-data-structures-algorithms",
-  body: string,
-  collection: "resources",
-  data: any
-},
-"how-to-become-frontend-master.md": {
-  id: "how-to-become-frontend-master.md",
-  slug: "how-to-become-frontend-master",
-  body: string,
-  collection: "resources",
-  data: any
-},
-},
 
 	};
 

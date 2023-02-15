@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+
+import { useSanityClient, groq } from "astro-sanity";
+import imageUrlBuilder from '@sanity/image-url'
+import ProductGrid5 from '@uikits/tuik/product-grid-5.astro'
+import Card from '@uikits/tailwindcss/card-stacked.astro'
+const builder = imageUrlBuilder(useSanityClient())
+function urlFor(source) {
+  return builder.image(source)
+}
+
+const blogEntries = await getCollection("resources");
+
+export async function getFirstBlogPost() {
+  const query = groq`*[_type == "brand"]{title, description, mainImage, tags[]->}`;
+  const firstPost = await useSanityClient().fetch(query);
+  return firstPost;
+}
+
+let brands = await getFirstBlogPost();
+console.dir({brands}, {depth:null})
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('resources');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+// 2. When its time to render, you can get the entry directly from the prop
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<h1>{entry.data.title}</h1>
+<Content />

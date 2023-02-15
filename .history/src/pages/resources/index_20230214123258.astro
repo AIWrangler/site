@@ -1,0 +1,46 @@
+---
+import { Picture } from "@astrojs/image/components";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import Layout from "@layouts/Layout.astro";
+import { getFormattedDate } from "@utils/all";
+import { log } from "astro/dist/core/logger/core";
+import { getCollection } from "astro:content";
+import { useSanityClient, groq } from "astro-sanity";
+import imageUrlBuilder from '@sanity/image-url'
+import ProductGrid5 from '@uikits/tuik/product-grid-5.astro'
+import Card from '@uikits/tailwindcss/card-stacked.astro'
+const builder = imageUrlBuilder(useSanityClient)
+function urlFor(source) {
+  return builder.image(source)
+}
+
+const blogEntries = await getCollection("resources");
+
+export async function getFirstBlogPost() {
+  const query = groq`*[_type == "brand"]`;
+  const firstPost = await useSanityClient().fetch(query);
+  console.log(firstPost);
+  return firstPost;
+}
+
+let brands = await getFirstBlogPost();
+---
+
+<Layout title="Resources">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Resources</Fragment>
+      <Fragment slot="desc">
+        We write about building startups and thoughts going on our mind.
+      </Fragment>
+    </Sectionhead>
+    <main class="mt-16">
+      <div class="flex flex-wrap">
+        {brands.map(brand=>
+          <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 mb-4 bg-gray-500"><Card data={{name: brand.title, decription: brand.description, imagebrand.mainImage}}/></div>
+        )}
+      </div>
+    </main>
+  </Container>
+</Layout>
