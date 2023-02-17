@@ -4,7 +4,7 @@ import Sectionhead from "@components/sectionhead.astro";
 import Layout from "@layouts/Layout.astro";
 import { useSanityClient, groq } from "astro-sanity";
 import imageUrlBuilder from '@sanity/image-url'
-import Card from '@uikits/tailwindcss/card-stacked.astro'
+import Card from '@ui/tailwindcss/card-stacked.astro'
 const builder = imageUrlBuilder(useSanityClient())
 function urlFor(source) {
   return builder.image(source)
@@ -25,7 +25,9 @@ let brands = await useSanityClient().fetch(groq`*[_type == "brand"]{title, slug,
     <main class="mt-16">
       <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
         {brands.map(brand=>
-          <div class=""><Card data={{title: brand.title, href: `/resources/${brand.slug.current}`, subtitle: brand.description, tags:brand?.tags?.map(t=>t.title), image: {src: urlFor(brand?.mainImage)}}}/></div>
+          <div class="">
+            <Card data={{title: brand.title, href: `/resources/${brand.slug.current}`, subtitle: brand.description, tags:brand?.tags?.map(t=>t.title), image: {src: urlFor(brand?.mainImage)}}}/>
+          </div>
         )}
       </div>
     </main>

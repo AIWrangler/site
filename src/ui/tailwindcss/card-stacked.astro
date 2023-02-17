@@ -1,0 +1,24 @@
+---
+// https://v1.tailwindcss.com/components/cards
+
+const {data} = Astro.props
+---
+
+<div class="mx-auto h-full max-w-sm rounded-md shadow-lg">
+  <a href={data.href}>
+    <div class="flex flex-col space-y-3 h-full justify-between pb-3">
+      <img class="object-fit w-full h-48" src={data?.image?.src} alt="Sunset in the mountains">
+      <div class="px-6">
+        <div class="font-bold text-xl mb-2">{data?.title}</div>
+        <div class="line-clamp-3">
+          {data?.subtitle}
+        </div>
+      </div>
+      <div class="px-3">
+        {data.tags?.map(tag=>
+          <span class="inline-block bg-gray-200 rounded-full text-xs text-gray-700">#{tag}</span>
+        )}
+      </div>
+    </div>
+  </a>
+</div>

@@ -3,6 +3,8 @@ import { useSanityClient, groq } from "astro-sanity";
 import imageUrlBuilder from "@sanity/image-url";
 import Container from "@components/container.astro";
 import Layout from "@layouts/Layout.astro";
+import PortableText from '@components/PortableText.astro';
+
 const builder = imageUrlBuilder(useSanityClient());
 function urlFor(source) {
   return builder.image(source);
@@ -10,7 +12,7 @@ function urlFor(source) {
 
 export async function getStaticPaths() {
   let brands = await useSanityClient().fetch(
-    groq`*[_type == "brand"]{title, slug, description, mainImage, tags[]->}`
+    groq`*[_type == "brand"]{title, slug, description, mainImage, tags[]->, links[]->, body}`
   );
   const paths = brands.map((brand) => ({
     params: { slug: brand.slug.current },
@@ -19,13 +21,14 @@ export async function getStaticPaths() {
   return paths;
 }
 const { brand } = Astro.props;
+console.dir({brand}, {depth:null})
 ---
 
 <Layout title="Resources">
   <Container>
     <main class="mt-24 mx-auto w-5/6 items-center flex">
       <div class="mx-auto flex flex-row space-x-20">
-        <div class="flex flex-col">
+        <div class="w-2/3 flex flex-col">
           <h1 class="text-5xl font-black">{brand.title}</h1>
           <dir class="flex flex-row space-x-6">
             {
@@ -55,9 +58,16 @@ const { brand } = Astro.props;
                   )
             }
           </div>
-          <p>{brand.description}</p>
+          <div class="flex flex-col space-y-10 prose">
+            <h2>Overview</h2>
+            {brand.description}
+            <h2>Description</h2>
+            <PortableText portableText={brand.body}/>
+          </div>
         </div>
-        <img class="w-1/2" src={urlFor(brand?.mainImage)} />
+        <div class="w-1/3 aspect-video object-fit">
+          <img src={urlFor(brand?.mainImage)} />
+        </div>
       </div>
     </main>
   </Container>
