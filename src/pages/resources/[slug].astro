@@ -21,25 +21,25 @@ const { brand } = Astro.props;
 
 <Layout title={brand.title}>
   <Container>
-    <main class="mt-24 mx-auto w-5/6 items-center flex">
-      <div class="mx-auto flex flex-row space-x-20">
-        <div class="w-2/3 flex flex-col space-y-4">
+    <main class="flex items-center w-5/6 mx-auto mt-24">
+      <div class="flex flex-row mx-auto space-x-20">
+        <div class="flex flex-col w-2/3 space-y-4">
           <h1 class="text-5xl font-black">{brand.title}</h1>
-          <div class="flex flex-row space-x-4 px-6">
+          <div class="flex flex-row px-6 space-x-4">
             {
               brand.links &&
                 brand.links.map(
                   (link) =>
                     link && (
                       <a class="" href={link.url} title={link.url}>
-                        <img class="w-6" src={urlForImage(link.type.logo)} />
+                        <img class="w-6" src={link.type.logo?urlForImage(link.type.logo):''} />
                       </a>
                     )
                 )
             }
           </div>
           <div
-            class="flex items-center sm:flex-row justify-between flex-wrap px-6">
+            class="flex flex-wrap items-center justify-between px-6 sm:flex-row">
             {
               brand.tags &&
                 brand.tags
@@ -50,8 +50,8 @@ const { brand } = Astro.props;
                         <div
                           tabindex={index}
                           aria-label="gray border badge"
-                          class="ocus:outline-none bg-indigo-700 h-6 mb-4 px-4 md:mb-0 rounded-full flex items-center justify-center">
-                          <span class="text-xs text-white dark:text-gray-100 font-normal">
+                          class="flex items-center justify-center h-6 px-4 mb-4 bg-indigo-700 rounded-full ocus:outline-none md:mb-0">
+                          <span class="text-xs font-normal text-white dark:text-gray-100">
                             #{tag.title}
                           </span>
                         </div>
@@ -59,13 +59,13 @@ const { brand } = Astro.props;
                   )
             }
           </div>
-          <div class="flex flex-col space-y-10 prose pt-8">
+          <div class="flex flex-col pt-8 space-y-10 prose">
             <h3>{brand.description}</h3>
             <PortableText portableText={brand.body}/>
           </div>
         </div>
         <div class="w-1/3 aspect-video object-fit">
-          <img src={urlForImage(brand.mainImage)} />
+          <img src={brand.mainImage?urlForImage(brand.mainImage):''} />
         </div>
       </div>
     </main>

@@ -23,7 +23,7 @@ let brands = await useSanityClient().fetch(groq`*[_type == "brand"]{title, slug,
       <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
         {brands.map(brand=>
           <div class="">
-            <Card data={{title: brand.title, href: `/resources/${brand.slug.current}`, subtitle: brand.description, tags:brand?.tags?.map(t=>t.title), image: {src: urlForImage(brand?.mainImage)}}}/>
+            <Card data={{title: brand.title, href: `/resources/${brand.slug.current}`, subtitle: brand.description, tags:brand?.tags?.map(t=>t.title), image: {src: brand.mainImage?urlForImage(brand.mainImage):''}}}/>
           </div>
         )}
       </div>
