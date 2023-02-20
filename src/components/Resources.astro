@@ -4,7 +4,7 @@ import Sectionhead from "@components/sectionhead.astro";
 import Card from '@ui/tailwindcss/card-stacked.astro'
 import {urlForImage} from '@utils/urlForImage'
 
-const {brands} = Astro.props
+const {brands, more} = Astro.props
 
 ---
 
@@ -23,5 +23,10 @@ const {brands} = Astro.props
         </div>
       )}
     </div>
+    { more &&
+      <div class="flex justify-end px-6 py-6">
+        <a href={more} class="text-blue-600 underline hover:text-blue-800 visited:text-purple-600">more...</a>
+      </div>
+    }
   </main>
 </Container>
