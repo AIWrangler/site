@@ -1,0 +1,16 @@
+---
+import Container from "@components/container.astro";
+import { getFormattedDate } from "@utils/all";
+import { log } from "astro/dist/core/logger/core";
+import Layout from "./Layout.astro";
+
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+  <Container>
+    <div class="mx-auto mt-6 prose prose-lg">
+      <slot />
+    </div>
+  </Container>
+</Layout>
