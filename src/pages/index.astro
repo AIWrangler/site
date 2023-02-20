@@ -18,8 +18,8 @@ let brands = await useSanityClient().fetch(groq`*[_type == "brand"][0..7]{title,
   <Container>
     <Hero />
     <Features />
+    <Logos />    
     <Resources {brands} more={"/resources"} />
-    <Logos />
     <Cta />
   </Container>
 </Layout>
