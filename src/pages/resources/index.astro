@@ -1,10 +1,7 @@
 ---
-import Container from "@components/container.astro";
-import Sectionhead from "@components/sectionhead.astro";
 import Layout from "@layouts/Layout.astro";
 import { useSanityClient, groq } from "astro-sanity";
-import Card from '@ui/tailwindcss/card-stacked.astro'
-import {urlForImage} from '@utils/urlForImage'
+import Resources from '@components/Resources.astro'
 
 
 let brands = await useSanityClient().fetch(groq`*[_type == "brand"]{title, slug, description, mainImage, tags[]->}`)
@@ -12,21 +9,5 @@ let brands = await useSanityClient().fetch(groq`*[_type == "brand"]{title, slug,
 ---
 
 <Layout title="Resources">
-  <Container>
-    <Sectionhead>
-      <Fragment slot="title">Resources</Fragment>
-      <Fragment slot="desc">
-        We write about building startups and thoughts going on our mind.
-      </Fragment>
-    </Sectionhead>
-    <main class="mt-16">
-      <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-        {brands.map(brand=>
-          <div class="">
-            <Card data={{title: brand.title, href: `/resources/${brand.slug.current}`, subtitle: brand.description, tags:brand?.tags?.map(t=>t.title), image: {src: brand.mainImage?urlForImage(brand.mainImage):''}}}/>
-          </div>
-        )}
-      </div>
-    </main>
-  </Container>
+  <Resources {brands} />
 </Layout>

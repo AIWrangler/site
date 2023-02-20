@@ -6,12 +6,20 @@ import Footer from "@components/footer.astro";
 import Hero from "@components/hero.astro";
 import Logos from "@components/logos.astro";
 import Layout from "@layouts/Layout.astro";
+
+import { useSanityClient, groq } from "astro-sanity";
+import Resources from '@components/Resources.astro'
+
+
+let brands = await useSanityClient().fetch(groq`*[_type == "brand"][0..7]{title, slug, description, mainImage, tags[]->}`)
+
 ---
 
 <Layout title="">
   <Container>
     <Hero />
     <Features />
+    <Resources {brands} />
     <Logos />
     <Cta />
   </Container>

@@ -1,23 +1,40 @@
 ---
 // https://v1.tailwindcss.com/components/cards
 
-const {data} = Astro.props
+import StarRatingComponent from "react-star-rating-component";
+const { data } = Astro.props;
 ---
 
-<div class="mx-auto h-full max-w-sm rounded-md shadow-lg">
+<div class="h-full max-w-sm mx-auto rounded-md shadow-lg">
   <a href={data.href}>
-    <div class="flex flex-col space-y-3 h-full justify-between pb-3">
-      <img class="object-fit w-full h-48" src={data?.image?.src} alt="Sunset in the mountains">
+    <div class="flex flex-col justify-between h-full pb-3 space-y-3">
+      <img
+        class="w-full h-48 object-fit"
+        src={data?.image?.src}
+        alt="Sunset in the mountains"
+      />
       <div class="px-6">
-        <div class="font-bold text-xl mb-2">{data?.title}</div>
+        <div class="mb-2 text-xl font-bold">{data?.title}</div>
         <div class="line-clamp-3">
           {data?.subtitle}
         </div>
       </div>
-      <div class="px-3">
-        {data.tags?.map(tag=>
-          <span class="inline-block bg-gray-200 rounded-full text-xs text-gray-700">#{tag}</span>
-        )}
+      <div class="flex flex-col px-3">
+        <div>
+          {data.tags?.map((tag) => <span class="text-gray-700">#{tag}</span>)}
+        </div>
+        {
+          data.stars && (
+            <div class="flex justify-end">
+              <StarRatingComponent
+                name="rate2"
+                editing={false}
+                starCount={5}
+                value={data.stars}
+              />
+            </div>
+          )
+        }
       </div>
     </div>
   </a>
