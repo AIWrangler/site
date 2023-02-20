@@ -34,11 +34,10 @@ const makeTitle = title
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- <link rel="preload" as="image" href={src} alt="Hero" /> -->
     <SEO
       title={makeTitle}
       description="AiWrangler provides services and resources for you"
@@ -61,7 +60,7 @@ const makeTitle = title
       }}
     />
   </head>
-  <body class="bg-slate-200">
+  <body>
     <Navbar />
     <slot />
     <Footer />
