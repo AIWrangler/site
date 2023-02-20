@@ -1,14 +1,14 @@
 ---
-import Container from "./Container.astro";
+import ContainerLayout from "./Container.astro";
 import { getFormattedDate } from "@utils/all";
 import { log } from "astro/dist/core/logger/core";
 
 const { frontmatter } = Astro.props;
 ---
 
-<Container title={frontmatter.title}>
+<ContainerLayout title={frontmatter.title}>
   {frontmatter && 
-    <div class="mx-auto max-w-[735px] mt-14">
+    <div slot="frontmatter" class="mx-auto max-w-[735px] mt-14">
       <span class="text-sm font-medium tracking-wider text-blue-400 uppercase">
         {frontmatter.category}
       </span>
@@ -31,15 +31,14 @@ const { frontmatter } = Astro.props;
   }
 
   <slot />
-      
-  {backTo && 
-    <div class="mt-8 text-center">
-      <a
-        href={back.href}
-        class="px-5 py-3 transition bg-gray-100 rounded-md hover:bg-gray-200"
-        {back.text}
-      </a>
-    </div>
-  }
+  
+  <div slot="postmatter" class="mt-8 text-center">
+    <a
+      href={'/blog'}
+      class="px-5 py-3 transition bg-gray-100 rounded-md hover:bg-gray-200"
+      >← Back to Blog</a
+    >
+  </div>
 
-</Container>
+</ContainerLayout>
+

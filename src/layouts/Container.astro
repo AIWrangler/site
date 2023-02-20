@@ -9,8 +9,10 @@ const { title } = Astro.props;
 
 <Layout title={title}>
   <Container>
+    <slot name="frontmatter" />
     <div class="mx-auto mt-6 prose prose-lg">
       <slot />
     </div>
+    <slot name="postmatter" />
   </Container>
 </Layout>
