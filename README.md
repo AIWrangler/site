@@ -1,6 +1,10 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4277daa4-9be9-4b98-830a-182ae072c5e0/deploy-status)](https://app.netlify.com/sites/aiwrangler/deploys)
+
 
 https://github.com/AMContent/site-ai-wrangler
+
 https://github.com/AMContent/netlify-ai-wrangler
+
 https://aiwrangler.netlify.com
 
 ---
