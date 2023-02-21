@@ -31,7 +31,7 @@ const { brand } = Astro.props;
                 brand.links.map(
                   (link) =>
                     link && (
-                      <a class="" href={link.url} title={link.url}>
+                      <a class="" href={link.url} title={link.url} target="_blank">
                         <img class="w-6" src={link.type.logo?urlForImage(link.type.logo):''} />
                       </a>
                     )
