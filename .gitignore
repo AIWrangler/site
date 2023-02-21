@@ -2,6 +2,7 @@
 dist/
 .output/
 .history/
+.astro
 
 # dependencies
 node_modules/
