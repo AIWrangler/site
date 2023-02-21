@@ -30,7 +30,6 @@ specifiers:
   react-star-rating-component: ^1.4.1
   sharp: ^0.31.3
   tailwindcss: ^3.2.7
-  undici: ^5.20.0
   update: ^0.7.4
   upgrade: ^1.1.0
 
@@ -62,7 +61,6 @@ dependencies:
   react-star-rating-component: 1.4.1_react@18.2.0
   sharp: 0.31.3
   tailwindcss: 3.2.7
-  undici: 5.20.0
   update: 0.7.4
   upgrade: 1.1.0
 
