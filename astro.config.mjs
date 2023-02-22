@@ -12,7 +12,7 @@ export default defineConfig({
   integrations: [tailwind(), [sanity({
     projectId: "hmeoyv0h",
     dataset: "production",
-    apiVersion: "2021-03-25",
+    apiVersion: "2023-02-22",
     useCdn: true
   })], image({
     serviceEntryPoint: "@astrojs/image/sharp"

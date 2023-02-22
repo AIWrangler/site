@@ -1,16 +1,12 @@
 ---
-import { useSanityClient, groq } from "astro-sanity";
 import Container from "@components/container.astro";
 import Layout from "@layouts/Layout.astro";
 import PortableText from '@components/PortableText.astro';
 
-import { urlForImage } from "@utils/urlForImage";
+import getBrands from "@utils/getBrands"
 
 export async function getStaticPaths() {
-  let brands = await useSanityClient().fetch(
-    groq`*[_type == "brand"]{title, slug, description, 'image':mainImage, 'stars':rating, tags[]->, links[]->{url, type->}, body}`
-  );
-  brands = brands.map(brand=>({...brand, image:{src:brand.image?urlForImage(brand.image):'', alt:brand.title}}))
+  let brands = await getBrands()
   const paths = brands.map((brand) => ({
     params: { slug: brand.slug.current },
     props: { brand },
@@ -33,7 +29,7 @@ const { brand } = Astro.props;
                   (link) =>
                     link && (
                       <a class="" href={link.url} title={link.url} target="_blank">
-                        <img class="w-6" src={link.type.logo?urlForImage(link.type.logo):''} />
+                        <img class="w-6" src={link.logo} />
                       </a>
                     )
                 )
@@ -44,7 +40,6 @@ const { brand } = Astro.props;
             {
               brand.tags &&
                 brand.tags
-                  .filter((t) => t.title)
                   .map(
                     (tag, index) =>
                       tag && (
@@ -53,7 +48,7 @@ const { brand } = Astro.props;
                           aria-label="gray border badge"
                           class="flex items-center justify-center h-6 px-4 mb-4 bg-indigo-700 rounded-full ocus:outline-none md:mb-0">
                           <span class="text-xs font-normal text-white dark:text-gray-100">
-                            #{tag.title}
+                            #{tag}
                           </span>
                         </div>
                       )
@@ -61,7 +56,7 @@ const { brand } = Astro.props;
             }
           </div>
           <div class="flex flex-col pt-8 space-y-10 prose">
-            <h3>{brand.description}</h3>
+            <h3>{brand.subtitle}</h3>
             <PortableText portableText={brand.body}/>
           </div>
         </div>

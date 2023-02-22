@@ -1,12 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { useSanityClient, groq } from "astro-sanity";
 import Resources from '@components/Resources.astro'
-import {urlForImage} from '@utils/urlForImage'
+import getBrands from "@utils/getBrands"
 
-let brands = await useSanityClient().fetch(groq`*[_type == "brand"]{title, slug, 'subtitle':description, 'image':mainImage, 'stars':rating, 'tags':tags[]->title}`)
-
-brands = brands.map(brand=>({...brand, href:`/resources/${brand.slug.current}`, image:{src:brand.image?urlForImage(brand.image):'', alt:brand.title}}))
+const brands = await getBrands()
 ---
 
 <Layout title="Resources">
