@@ -8,7 +8,7 @@ import getBrands from "@utils/getBrands"
 export async function getStaticPaths() {
   let brands = await getBrands()
   const paths = brands.map((brand) => ({
-    params: { slug: brand.slug.current },
+    params: { slug: brand.slug },
     props: { brand },
   }));
   return paths;

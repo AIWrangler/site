@@ -4,7 +4,7 @@ import Sectionhead from "@components/sectionhead.astro";
 import Card from '@ui/tailwindcss/card-stacked.astro'
 import {urlForImage} from '@utils/urlForImage'
 
-const {brands, more} = Astro.props
+const {brands, baseurl, more} = Astro.props
 ---
 
 <Container>
@@ -18,7 +18,7 @@ const {brands, more} = Astro.props
     <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
       {brands.map(data=>
         <div class="">
-          <Card {...data} />
+          <Card {...data} {baseurl} />
         </div>
       )}
     </div>

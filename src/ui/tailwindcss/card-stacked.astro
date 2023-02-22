@@ -2,7 +2,7 @@
 // https://v1.tailwindcss.com/components/cards
 
 import StarRatingComponent from "react-star-rating-component";
-const { title, subtitle, href, image, tags, stars } = Astro.props;
+const { title, subtitle, baseurl, slug, image, tags, stars } = Astro.props;
 
 /*
     <div class="flex flex-col justify-between h-full pb-3 space-y-3">
@@ -43,7 +43,7 @@ const { title, subtitle, href, image, tags, stars } = Astro.props;
 ---
 
 <div class="h-full max-w-sm mx-auto rounded-md shadow-lg">
-  <a href={href}>
+  <a href={`${baseurl}/${slug}`}>
     <div class="h-full max-w-sm rounded shadow-lg">
       { image &&
         <div class="flex-none">
