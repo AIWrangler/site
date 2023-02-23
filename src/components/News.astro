@@ -1,9 +1,6 @@
 ---
 import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
-import Card from '@ui/tailwindcss/card-stacked.astro'
-import {urlForImage} from '@utils/urlForImage'
-
 const {data, more} = Astro.props
 
 ---
@@ -15,30 +12,24 @@ const {data, more} = Astro.props
       Best resources for AI from around the world.
     </Fragment>
   </Sectionhead>
-  <main class="mt-16">
+  <main class="mt-16 flex flex-col space-y-6">
       {data.map(item=>
         <a href={item.url} target="_blank">
-          <div class="bg-white rounded sm:shadow dark:bg-gray-800">
-            <div class="flex flex-wrap items-center justify-between w-11/12 px-8 mx-auto mb-2 xl:w-full xl:mb-0 lg:mb-0">
-              <div class="py-5 xl:w-full">
-                <div class="flex items-center">
-                  <div class="rounded h-14 w-14">
-                    <img
-                      src={item.image.src}
-                      alt={item.image.alt || item.name}
-                      class="object-cover w-full h-full overflow-hidden rounded shadow"
-                    />
-                  </div>
-                  <div class="flex flex-col pl-4">
-                    <p class="font-normal text-gray-800 dark:text-gray-100">
-                      {item.title}
-                    </p>
-                    <p class="text-sm font-normal text-gray-600 dark:text-gray-300">{item.subtitle}</p>
-                  </div>
+            <div class="flex items-start w-full hover:bg-stone-300 p-2 rounded-lg">
+                <div class="rounded h-16 w-16 shrink-0">
+                  <img
+                    src={item.image.src}
+                    alt={item.image.alt || item.name}
+                    class="object-cover w-full h-full overflow-hidden rounded shadow"
+                  />
                 </div>
-              </div>
-            </div>
-          </div>
+                <div class="flex flex-col pl-4">
+                  <p class="font-bold text-lg text-stone-900 dark:text-gray-100">
+                    {item.title}
+                  </p>
+                  <p class="text-sm font-normal text-gray-600 dark:text-gray-300">{item.subtitle}</p>
+                </div>
+          </div>          
         </a>
       )}
     { more &&

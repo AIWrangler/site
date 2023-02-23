@@ -46,8 +46,8 @@ const { title, subtitle, baseurl, slug, image, tags, stars } = Astro.props;
   <a href={`${baseurl}/${slug}`}>
     <div class="h-full max-w-sm rounded shadow-lg">
       { image &&
-        <div class="flex-none">
-          <img class="h-48 object-fit w-96" src={image.src} alt={image.alt} />
+        <div class="">
+          <img class="rounded-t-md h-48 object-fit w-96" src={image.src} alt={image.alt} />
         </div>
       }
       <div class="flex flex-col justify-start flex-1">

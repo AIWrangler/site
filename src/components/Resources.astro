@@ -14,10 +14,10 @@ const {brands, baseurl, more} = Astro.props
       Best resources for AI from around the world.
     </Fragment>
   </Sectionhead>
-  <main class="mt-16">
+  <main class="mt-16 ">
     <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
       {brands.map(data=>
-        <div class="">
+        <div class="hover:bg-stone-100 p-2 rounded-lg">
           <Card {...data} {baseurl} />
         </div>
       )}
