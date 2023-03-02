@@ -7,9 +7,9 @@ import Logos from "@components/logos.astro";
 import Layout from "@layouts/Layout.astro";
 
 import Resources from '@components/Resources.astro'
-import getBrands from "@utils/getBrands"
+import {Brands} from "@utils/getBrands"
 
-const brands = await getBrands(8)
+const brands = await Brands(8)
 ---
 
 <Layout title="">
