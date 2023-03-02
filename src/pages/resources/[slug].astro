@@ -2,11 +2,10 @@
 import Container from "@components/container.astro";
 import Layout from "@layouts/Layout.astro";
 import PortableText from '@components/PortableText.astro';
-
-import getBrands from "@utils/getBrands"
+import {Brands} from "@utils/getBrands"
 
 export async function getStaticPaths() {
-  let brands = await getBrands()
+  let brands = await Brands()
   const paths = brands.map((brand) => ({
     params: { slug: brand.slug },
     props: { brand },

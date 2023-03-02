@@ -1,0 +1,40 @@
+---
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+
+const {images, baseurl, more} = Astro.props
+console.log('gallery', images)
+---
+
+<Container>
+  <Sectionhead>
+    <Fragment slot="title">Gallery</Fragment>
+    <Fragment slot="desc">
+      Best gallery for AI from around the world.
+    </Fragment>
+  </Sectionhead>
+  <main class="mt-16 ">
+    <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+      {images && images.map(image=>
+        <div class="hover:bg-stone-100 p-2 rounded-lg">
+          <div class="grid-cols-3">
+            <div>{image.prompt}</div>
+            <div>{image.negativePrompt}</div>
+            <img src={image.image} alt={image.prompt}/>
+            <div class="py-2">
+              {image.tools && image.tools.map(tool=>
+                <span class="bg-indigo-300 px-2 py-1 rounded-lg">
+                  <a href={`resources/${tool.slug}`}>{tool.title}</a></span>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+    { more &&
+      <div class="flex justify-end px-6 py-6">
+        <a href={more} class="text-blue-600 underline hover:text-blue-800 visited:text-purple-600">more...</a>
+      </div>
+    }
+  </main>
+</Container>

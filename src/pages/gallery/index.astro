@@ -1,0 +1,10 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Gallery from '@components/Gallery.astro'
+import {TextToImages} from "@utils/getBrands"
+const images = await TextToImages()
+---
+
+<Layout title="News">
+  <Gallery {images} baseurl='/gallery' />
+</Layout>

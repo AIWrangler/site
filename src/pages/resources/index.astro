@@ -1,9 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Resources from '@components/Resources.astro'
-import getBrands from "@utils/getBrands"
+import {Brands} from "@utils/getBrands"
 
-const brands = await getBrands()
+const brands = await Brands()
 ---
 
 <Layout title="Resources">
