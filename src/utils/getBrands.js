@@ -23,3 +23,15 @@ export async function TextToImages(limit=0) {
 
   return images
 }
+
+export async function Articles(limit = 0) {
+  let articles = await useSanityClient().fetch(
+    groq`*[_type == "link" && type->title == "Article"]{title, url, 'subtitle':description, 'image':image.asset->url}`
+  );
+
+  if (limit) {
+    return articles.slice(0, limit);
+  }
+
+  return articles;
+}

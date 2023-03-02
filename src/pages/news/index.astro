@@ -1,17 +1,12 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { useSanityClient, groq } from "astro-sanity";
 import News from '@components/News.astro'
-import {urlForImage} from '@utils/urlForImage'
+import {Articles} from "@utils/getBrands"
 
-let articles = await useSanityClient().fetch(groq`*[_type == "link" && type->title == "Article"]{title, url, description, image}`)
-console.dir(articles)
+const articles = await Articles()
+
 ---
 
 <Layout title="News">
-  <News data={articles.map(
-    item=>(
-      {title: item.title, subtitle: item.description, url: item.url, image: {src: item.image?urlForImage(item.image):''}}
-    )
-  )}/>
+  <News data={articles} />
 </Layout>

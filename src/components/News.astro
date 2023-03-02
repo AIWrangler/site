@@ -1,7 +1,7 @@
 ---
 import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
-const {data, more} = Astro.props
+const {data, baseURl, more} = Astro.props
 
 ---
 
@@ -13,13 +13,13 @@ const {data, more} = Astro.props
     </Fragment>
   </Sectionhead>
   <main class="mt-16 flex flex-col space-y-6">
-      {data.map(item=>
+      {data && data.map(item=>
         <a href={item.url} target="_blank">
             <div class="flex items-start w-full hover:bg-stone-300 p-2 rounded-lg">
                 <div class="rounded h-16 w-16 shrink-0">
                   <img
-                    src={item.image.src}
-                    alt={item.image.alt || item.name}
+                    src={item.image}
+                    alt={item.title}
                     class="object-cover w-full h-full overflow-hidden rounded shadow"
                   />
                 </div>
