@@ -40,12 +40,12 @@ console.log(tag)
       <div class="flex flex-col space-y-2">
       { Object.keys(tags).map((slug) =>
           <a href={`/use-cases/${slug}`}>  
-            <div class="flex items-center justify-between cursor-pointer rounded-md p-3 hover:bg-slate-200">
-            <span class="uppercase text-2xl">
-              {tags[slug].title} 
-            </span>
-            <span class="bg-accent text-accent-content px-2 rounded-full">{tags[slug].brands.length}</span>
-              </div>            
+            <div class=`flex items-center justify-between cursor-pointer rounded-md p-3 hover:bg-slate-300 ${slug===tag.slug?"bg-slate-200":""}`>
+              <span class="uppercase text-2xl">
+                {tags[slug].title} 
+              </span>
+              <span class="bg-accent text-accent-content px-2 rounded-full">{tags[slug].brands.length}</span>
+            </div>            
           </a>          
       )}    
       </div>
