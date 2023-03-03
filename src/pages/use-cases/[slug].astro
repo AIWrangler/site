@@ -1,0 +1,33 @@
+---
+import Layout from "@layouts/Layout.astro";
+import {Brands} from "@utils/getBrands"
+import UseCases from '@components/UseCases.astro'
+
+export async function getStaticPaths() {
+  let brands = await Brands()
+  const tags = {}
+  brands?.forEach(brand => {
+    brand.tags?.forEach(tag => {
+      if (!tags[tag.slug]) {
+        tags[tag.slug] = {title: tag.title, slug: tag.slug, brands: []}
+      }
+      
+      tags[tag.slug].brands.push(brand)
+    })
+  })
+
+  const paths = Object.keys(tags).map( slug => {
+    console.log('slug:', slug, tags[slug].brands.length)
+    return {
+    params: { slug: slug },
+    props: {tag: tags[slug]} ,
+  }})
+  return paths;
+}
+const { tag } = Astro.props;
+let brands = await Brands()
+---
+
+<Layout title="Use Cases">
+  <UseCases {brands} slug={tag.slug} baseurl='/use-cases' />
+</Layout>

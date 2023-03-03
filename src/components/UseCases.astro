@@ -1,0 +1,62 @@
+---
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import Note from '@ui/tuik/note'
+
+let {brands, baseurl, slug, more} = Astro.props
+const tags = {}
+brands?.forEach(brand => {
+  brand.tags?.forEach(tag => {
+    if (!tags[tag.slug]) {
+      tags[tag.slug] = {title: tag.title, slug: tag.slug, brands: []}
+    }
+    
+    tags[tag.slug].brands.push(brand)
+  })
+})
+
+if (!slug){
+  slug = 'news'
+}
+
+const tag = tags[slug]
+console.log(tag)
+---
+
+<Container>
+  <Sectionhead>
+    <Fragment slot="label">
+      <div>use cases</div>
+    </Fragment>
+    <Fragment slot="title">
+        <div class="uppercase">{tag.title}</div>
+    </Fragment>
+    <Fragment slot="desc">
+      Best resources for AI from around the world.
+    </Fragment>
+  </Sectionhead>
+  <main class="mt-16">  
+    <div class="flex flex-row gap-x-8">
+      <div class="flex flex-col space-y-2">
+      { Object.keys(tags).map((slug) =>
+          <a href={`/use-cases/${slug}`}>  
+            <div class="flex items-center justify-between cursor-pointer rounded-md p-3 hover:bg-slate-200">
+            <span class="uppercase text-2xl">
+              {tags[slug].title} 
+            </span>
+            <span class="bg-accent text-accent-content px-2 rounded-full">{tags[slug].brands.length}</span>
+              </div>            
+          </a>          
+      )}    
+      </div>
+      <div>
+        <Note list={tag.brands}/>
+        { more &&
+          <div class="flex justify-end px-6 py-6">
+            <a href={more} class="text-blue-600 underline hover:text-blue-800 visited:text-purple-600">more...</a>
+          </div>
+        }
+      </div>
+    </div>
+  </main>
+</Container>

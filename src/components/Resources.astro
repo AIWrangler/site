@@ -1,7 +1,7 @@
 ---
 import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
-import Card from '@ui/tailwindcss/card-stacked.astro'
+import ResourcePanel from './ResourcePanel.astro'
 
 const {brands, baseurl, more} = Astro.props
 ---
@@ -13,14 +13,8 @@ const {brands, baseurl, more} = Astro.props
       Best resources for AI from around the world.
     </Fragment>
   </Sectionhead>
-  <main class="mt-16 ">
-    <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-      {brands.map(data=>
-        <div class="hover:bg-stone-100 p-2 rounded-lg">
-          <Card {...data} {baseurl} />
-        </div>
-      )}
-    </div>
+  <main class="mt-16 flex">
+    <ResourcePanel {brands} {baseurl} />
     { more &&
       <div class="flex justify-end px-6 py-6">
         <a href={more} class="text-blue-600 underline hover:text-blue-800 visited:text-purple-600">more...</a>

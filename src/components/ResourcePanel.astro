@@ -1,0 +1,13 @@
+---
+import Card from '@ui/tailwindcss/card-stacked.astro'
+
+const {brands, baseurl} = Astro.props
+---
+
+<div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+  {brands.map(data=>
+    <div class="hover:bg-stone-100 p-2 rounded-lg">
+      <Card {...data} {baseurl} />
+    </div>
+  )}
+</div>

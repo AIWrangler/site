@@ -2,7 +2,7 @@ import { useSanityClient, groq } from "astro-sanity";
 
 export async function Brands(limit=0) {
   let brands = await useSanityClient().fetch(
-    groq`*[_type == "brand"]{title, 'slug':slug.current, 'subtitle':description, body, 'image':{'src': mainImage.asset->url}, 'stars':rating, 'tags':tags[]->title, links[]->{url, 'logo':type->logo.asset->url}}`
+    groq`*[_type == "brand"]{title, 'slug':slug.current, 'subtitle':description, body, 'image':{'src': mainImage.asset->url}, 'stars':rating, 'tags':tags[]->{title, 'slug':slug.current}, links[]->{url, 'logo':type->logo.asset->url}}`
   );
 
   if(limit){
@@ -34,4 +34,16 @@ export async function Articles(limit = 0) {
   }
 
   return articles;
+}
+
+export async function Tags(limit = 0) {
+  let tags = await useSanityClient().fetch(
+    groq`*[_type == "tag"]{title}`
+  );
+
+  if (limit) {
+    return tags.slice(0, limit);
+  }
+
+  return tags;
 }
