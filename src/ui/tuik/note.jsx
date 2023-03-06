@@ -18,8 +18,8 @@ const Index = (props) => {
           {list.map((item) => (
             <a
               href={`/resources/${item.slug}`}
-              class="hover:shadow-md hover:border-opacity-0 transform hover:-translate-y-1 transition-all duration-200">
-              <div className="w-full h-72 flex flex-col justify-between dark:bg-gray-800 bg-white dark:border-gray-700 rounded-lg border border-gray-400 mb-6 py-5 px-4 hover:bg-slate-200">
+              class=" transform hover:-translate-y-1 transition-all duration-200">
+              <div className="w-full h-72 flex flex-col justify-between dark:bg-gray-800 bg-white dark:border-gray-700 rounded-lg border border-gray-400 mb-6 py-5 px-4 hover:bg-slate-200 hover:shadow-md hover:border-opacity-0">
                 <div>
                   <h3 className="text-gray-800 dark:text-gray-100 leading-7 font-semibold w-11/12">
                     {item.title}
