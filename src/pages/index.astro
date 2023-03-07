@@ -11,7 +11,7 @@ import Gallery from '@components/Gallery.astro'
 import News from '@components/News.astro'
 import {Brands, TextToImages, Articles} from "@utils/getBrands"
 const images = await TextToImages()
-const brands = await Brands(8)
+const {brands} = await Brands(8)
 const articles = await Articles(8)
 ---
 
