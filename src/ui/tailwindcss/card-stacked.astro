@@ -3,43 +3,6 @@
 
 import StarRatingComponent from "react-star-rating-component";
 const { title, subtitle, baseurl, slug, image, tags, stars } = Astro.props;
-
-/*
-    <div class="flex flex-col justify-between h-full pb-3 space-y-3">
-      <div class="h-48">
-        <img
-        class="w-full h-full"
-        src={image.src}
-        alt={image.alt}
-        />
-      </div>
-      <div class="flex flex-col justify-start">
-        <div class="h-full px-6">
-          <div class="mb-2 text-xl font-bold">{title}</div>
-          <div class="line-clamp-3">
-            {subtitle}
-          </div>
-        </div>
-        <div class="flex flex-col px-3 shrink-0">
-          <div class="flex w-fit">
-            {tags?.map((tag) => <span class="px-2 py-1 text-sm text-gray-700 rounded-lg -fit hover:bg-slate-200 ">#{tag}</span>)}
-          </div>
-          {
-            stars && (
-              <div class="flex justify-end">
-                <StarRatingComponent
-                  name="rate2"
-                  editing={false}
-                  starCount={5}
-                  value={stars}
-                />
-              </div>
-            )
-          }
-        </div>
-      </div>
-    </div>
-*/
 ---
 
 <div class="h-full max-w-sm mx-auto rounded-md shadow-lg">
@@ -62,9 +25,9 @@ const { title, subtitle, baseurl, slug, image, tags, stars } = Astro.props;
             {
               tags &&
                 tags.map((tag) => (
-                  <a href={`/use-cases/${tag.slug}`}>
+                  <a href={`/use-cases/${tag?.slug}`}>
                     <span class="inline-block px-2 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 rounded-full hover:bg-gray-200">
-                      #{tag.title}
+                      #{tag?.title}
                     </span>
                   </a>
                 ))

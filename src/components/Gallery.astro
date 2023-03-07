@@ -3,7 +3,6 @@ import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
 
 const {images, baseurl, more} = Astro.props
-console.log('gallery', images)
 ---
 
 <Container>
@@ -16,17 +15,25 @@ console.log('gallery', images)
   <main class="mt-16 ">
     <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
       {images && images.map(image=>
-        <div class="hover:bg-stone-100 p-2 rounded-lg hover:shadow-md hover:border-opacity-0 transform hover:-translate-y-1 transition-all duration-200">
-          <div class="grid-cols-3">
-            <div>{image.prompt}</div>
-            <div>{image.negativePrompt}</div>
-            <img src={image.image} alt={image.prompt}/>
-            <div class="py-2">
-              {image.tools && image.tools.map(tool=>
-                <span class="bg-indigo-300 px-2 py-1 rounded-lg">
-                  <a href={`resources/${tool.slug}`}>{tool.title}</a></span>
-              )}
-            </div>
+        <div class="hover:bg-stone-100 p-2 rounded-lg hover:shadow-md hover:border-opacity-0 transform hover:-translate-y-1 transition-all duration-200 group">
+          <div class="grid-cols-3 relative h-full">
+              <img src={image.image} alt={image.prompt} class="group-hover:opacity-20 rounded-lg"/>
+              <div class="absolute h-full opacity-0 group-hover:opacity-100 top-0 left-0 flex flex-col justify-between text-center py-6 px-4 space-y-2">
+                <div class="line-clamp-4 font-bold">{image.prompt}</div>
+                <div class="">{image.negativePrompt}</div>            
+                <div class="py-2">
+                  {image.tools && image.tools.map(tool=>
+                    <span class="bg-indigo-300 px-2 py-1 rounded-lg">
+                      <a href={`resources/${tool.slug}`}>{tool.title}</a></span>
+                  )}
+                </div>              
+                <div class="py-2">
+                  {image.models && image.models.map(model=>
+                    <span class="bg-amber-300 px-2 py-1 rounded-lg">
+                      {model.title}</span>
+                  )}
+                </div>  
+            </div>            
           </div>
         </div>
       )}

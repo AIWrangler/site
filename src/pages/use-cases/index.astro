@@ -3,9 +3,10 @@ import Layout from "@layouts/Layout.astro";
 import UseCases from '@components/UseCases.astro'
 import {Brands} from "@utils/getBrands"
 
-const brands = await Brands()
+const {tags} = await Brands()
+console.log(tags)
 ---
 
 <Layout title="Use Cases">
-  <UseCases {brands} baseurl='/use-cases' />
+  <UseCases {tags} baseurl='/use-cases' />
 </Layout>

@@ -3,7 +3,7 @@ import Layout from "@layouts/Layout.astro";
 import Resources from '@components/Resources.astro'
 import {Brands} from "@utils/getBrands"
 
-const brands = await Brands()
+const {brands} = await Brands()
 ---
 
 <Layout title="Resources">

@@ -6,15 +6,28 @@ export async function Brands(limit=0) {
   );
 
   if(limit){
-      return brands.slice(0, limit)
+      brands = brands.slice(0, limit)
   }
 
-  return brands
+  let tags = {}
+  brands?.forEach((brand) => {
+    brand.tags?.forEach((tag) => {
+      if (tag) {
+        if (!tags[tag.slug]) {
+          tags[tag.slug] = { title: tag.title, slug: tag.slug, brands: [] };
+        }
+
+        tags[tag.slug].brands.push(brand);
+      }
+    });
+  });  
+
+  return {brands, tags}
 }
 
 export async function TextToImages(limit=0) {
   let images = await useSanityClient().fetch(
-    groq`*[_type == "textToImage"]{title, 'slug':slug.current, prompt, negativePrompt, 'image':image.asset->url, 'tools':tool[]->{'slug':slug.current, title}}`
+    groq`*[_type == "textToImage"]{title, 'slug':slug.current, prompt, negativePrompt, 'image':image.asset->url, 'tools':tool[]->{'slug':slug.current, title}, 'models':model[]->{title}}`
   );
 
   if(limit){
@@ -38,7 +51,7 @@ export async function Articles(limit = 0) {
 
 export async function Tags(limit = 0) {
   let tags = await useSanityClient().fetch(
-    groq`*[_type == "tag"]{title}`
+    groq`*[_type == "tag"]{title, 'slug':slug.current}`
   );
 
   if (limit) {

@@ -5,7 +5,7 @@ import PortableText from '@components/PortableText.astro';
 import {Brands} from "@utils/getBrands"
 
 export async function getStaticPaths() {
-  let brands = await Brands()
+  let {brands} = await Brands()
   const paths = brands.map((brand) => ({
     params: { slug: brand.slug },
     props: { brand },
@@ -46,9 +46,11 @@ const { brand } = Astro.props;
                           tabindex={index}
                           aria-label="gray border badge"
                           class="flex items-center justify-center h-6 px-4 mb-4 bg-indigo-700 rounded-full ocus:outline-none md:mb-0">
-                          <span class="text-xs font-normal text-white dark:text-gray-100">
-                            #{tag}
-                          </span>
+                          <a href={`/use-cases/${tag.slug}`}>
+                            <span class="text-xs font-normal text-white dark:text-gray-100">
+                              #{tag.title}
+                            </span>
+                          </a>
                         </div>
                       )
                   )
