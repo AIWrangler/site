@@ -1,0 +1,12 @@
+---
+import Layout from "@layouts/Layout.astro";
+import UseCases from '@components/UseCases.astro'
+import {Brands} from "@utils/getBrands"
+
+const {tags} = await Brands()
+console.log(tags)
+---
+
+<Layout title="Use Cases">
+  <UseCases {tags} baseurl='/use-cases' />
+</Layout>
